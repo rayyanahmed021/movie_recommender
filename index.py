@@ -94,7 +94,7 @@ def recommend(movie):
 
 @app.route('/data')
 def test():
-    a = {"hi":"world!}
+    a = {"hi":"world!"}
     return a
 
 
