@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 movies = pd.read_csv('tmdb_5000_movies.csv')
 credits = pd.read_csv('tmdb_5000_credits.csv')
-credits += pd.read_csv('tmdb_5000_credit(2).csv')
+credits += pd.read_csv('tmbd_5000_credit(2).csv')
 
 movies = movies.merge(credits,on='title')
 movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
