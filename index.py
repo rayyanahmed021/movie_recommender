@@ -11,11 +11,20 @@ from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
-#CORS(app, support_credentials=True)
+CORS(app, support_credentials=True)
 
 movies = pd.read_csv('tmdb_5000_movies.csv')
 credits = pd.read_csv('tmdb_5000_credits.csv')
-credits += pd.read_csv('tmbd_5000_credit(2).csv')
+credits1 = pd.read_csv('tmbd_5000_credit(2).csv')
+# credits_merged = credits.append(credits1,ignore_index=True)
+credits = pd.concat([credits, credits1],ignore_index=True )
+# combined_df = df_merged.reset_index(drop=True)
+
+# df_col_merged = pd.concat([credits, credits1], axis=1)
+
+# pd.concat(credits,credits1)
+# print(credits.columns, "credit1", credits1.columns)
+# print(df_merged)
 
 movies = movies.merge(credits,on='title')
 movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
@@ -100,17 +109,17 @@ def recommend(movie):
 # similarity = pickle.load(open('/Users/rayyanahmed/Desktop/movie_recommender/similarity.pkl','rb'))
 
 @app.route('/data')
-#@cross_origin(origin='*')
+@cross_origin(origin='*')
 def test():
-    # return recommend('spider')
+    return recommend('Pan')
     # return f"{request.args}"
     # print(request.args)
     # return recommend("Pan")
-    response_body = {
-        "name": "Nagato",
-        "about" :"Hello! I'm a full stack developer that loves python and javascript"
-    }
-    return response_body
+    # response_body = {
+    #     "name": "Nagato",
+    #     "about" :"Hello! I'm a full stack developer that loves python and javascript"
+    # }
+    # return response_body
 
 
 @app.route('/recom')
