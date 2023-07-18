@@ -13,8 +13,10 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 #CORS(app, support_credentials=True)
 
-movies = pd.read_csv('/Users/rayyanahmed/Desktop/movie_recommender/tmdb_5000_movies.csv')
-credits = pd.read_csv('/Users/rayyanahmed/Desktop/movie_recommender/tmdb_5000_credits.csv')
+movies = pd.read_csv('tmdb_5000_movies.csv')
+credits = pd.read_csv('tmdb_5000_credits.csv')
+credits += pd.read_csv('tmdb_5000_credit(2).csv')
+
 movies = movies.merge(credits,on='title')
 movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
 
