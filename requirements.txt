@@ -1,0 +1,9 @@
+flask
+pickle
+streamlit
+requests
+numpy
+pandas
+ast
+flask_cors
+scikit-learn
